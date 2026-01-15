@@ -23,6 +23,7 @@ def move_player(x, y):
         elif key == "a": y -= 1
         elif key == "d": y += 1
         elif key == "q": return x, y, "quit"
+        elif key == " ": return x, y, " "
 
     else:
         if key == b'\xe0':
@@ -43,12 +44,19 @@ def render(board, x, y):
     
     os.system("cls")  
     
+    copy_board = board[:]
+    
+    for i in range(SIZE):
+        for j in range(SIZE):
+            if copy_board[i][j] == "🌟":
+                copy_board[i][j] = "*"
+                
     for i in range(SIZE):
         for j in range(SIZE):
             if i == x and j == y:
                 sys.stdout.write(f"{MINER} ") 
             else:
-                sys.stdout.write(f"{board[i][j]} ")
+                sys.stdout.write(f"{copy_board[i][j]} ")
 
         sys.stdout.write("\n")
         
@@ -81,12 +89,18 @@ def start():
         if key == "quit":
             break
         
-        if board[x][y] == "🌟":
-            counter += 1
-            board[x][y] = "*"
-            print(status_message)
-            time.sleep(3)            
-            
+        if key == " ":
+            if board[x][y] == "🌟":
+                counter += 1
+                board[x][y] = "*"
+                print(status_message)
+                time.sleep(3)
+
+            elif board[x][y] == "*":
+                status_message = "It's empty! Try again!"
+                print(status_message)
+                time.sleep(3)
+
         if counter == GOLDS:
             print("You won!")
             break
