@@ -23,7 +23,6 @@ def move_player(x, y):
         elif key == "a": y -= 1
         elif key == "d": y += 1
         elif key == "q": return x, y, "quit"
-        elif key == " ": return x, y, " "
 
     else:
         if key == b'\xe0':
@@ -95,12 +94,12 @@ def start():
                 board[x][y] = "*"
                 print(status_message)
                 time.sleep(3)
+                
 
             elif board[x][y] == "*":
                 status_message = "It's empty! Try again!"
                 print(status_message)
-                time.sleep(3)
-                render(board, x, y)
+                time.sleep(1.5)
 
         if counter == GOLDS:
             print("You won!")
