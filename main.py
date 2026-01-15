@@ -89,7 +89,7 @@ def start():
         if key == "quit":
             break
         
-        if key == " ":
+        if key == "":
             if board[x][y] == "🌟":
                 counter += 1
                 board[x][y] = "*"
@@ -100,6 +100,7 @@ def start():
                 status_message = "It's empty! Try again!"
                 print(status_message)
                 time.sleep(3)
+                render(board, x, y)
 
         if counter == GOLDS:
             print("You won!")
